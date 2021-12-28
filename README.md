@@ -1,7 +1,8 @@
 
 
 
-# CityName= Ankara <img width="802" alt="Screen Shot 2021-12-28 at 21 50 12" src="https://user-images.githubusercontent.com/94717318/147597630-2127d003-0089-4706-983d-0152efb094b6.png">
+# CityName= Ankara <img width="806" alt="Screen Shot 2021-12-28 at 22 27 23" src="https://user-images.githubusercontent.com/94717318/147600386-5e66d92c-4ca9-47ad-a2cf-a0ccc7910d7f.png">
+
 
 
 # CityName= Istanbul <img width="811" alt="Screen Shot 2021-12-28 at 21 52 18" src="https://user-images.githubusercontent.com/94717318/147598274-9fbbbec0-3387-4958-8db8-787e2c6abe56.png">
