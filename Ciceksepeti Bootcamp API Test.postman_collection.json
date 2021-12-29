@@ -13,20 +13,43 @@
 					"script": {
 						"exec": [
 							" let jsonData = pm.response.json();",
-							"var size = Object.keys(jsonData.reviewDtos).length;",
 							"",
 							"pm.test(\"Response time is less than 1000ms\", function () {",
 							"    pm.expect(pm.response.responseTime).to.be.below(1000);",
 							"});",
+							"",
+							"if(jsonData.reviewDtos && jsonData.reviewDtos!==null){",
+							"",
 							"pm.test(\"Status code is 200\", function () {",
 							"    pm.response.to.have.status(200);",
 							"});",
-							
-							"for(let i=0;i<size;i++){",
+							"",
+							"for(let i=0;i<jsonData.reviewDtos.length;i++){",
 							"pm.test(\"IsCityNameAnkara\", function() {",
-							"    console.log(jsonData.reviewDtos[i].cityName)",
 							"  pm.expect(jsonData.reviewDtos[i].cityName).to.eql(\"ANKARA\");",
-							"})};"
+							"})};",
+							"}",
+							"else if (jsonData.reviewDtos==null){",
+							"",
+							"    pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"message should be 'Not Found'\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"Not Found\");",
+							"})} ",
+							"else {",
+							"    ",
+							"    pm.test(\"Status code is 400\", function () {",
+							"    pm.response.to.have.status(400);",
+							"",
+							"    pm.test(\"cityName: can not be null\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"'cityName' can not be null.\");",
+							"});",
+							"}",
+							"",
+							"",
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -36,10 +59,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://a7186cd5-de01-4d09-adc9-9cddfb83e72e.mock.pstmn.io?cityName=ankara",
+					"raw": "https://43a63e71-b824-4c12-b7a9-5f9750a62d21.mock.pstmn.io?cityName=ankara",
 					"protocol": "https",
 					"host": [
-						"a7186cd5-de01-4d09-adc9-9cddfb83e72e",
+						"43a63e71-b824-4c12-b7a9-5f9750a62d21",
 						"mock",
 						"pstmn",
 						"io"
@@ -62,18 +85,41 @@
 					"script": {
 						"exec": [
 							" let jsonData = pm.response.json();",
-							"var size = Object.keys(jsonData.reviewDtos).length;",
+							"",
+							"pm.test(\"Response time is less than 1000ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);",
+							"});",
+							"",
+							"if(jsonData.reviewDtos && jsonData.reviewDtos!==null){",
 							"",
 							"pm.test(\"Status code is 200\", function () {",
 							"    pm.response.to.have.status(200);",
 							"});",
-							"pm.test(\"Response time is less than 1000ms\", function () {",
-							"    pm.expect(pm.response.responseTime).to.be.below(1000);",
-							"});",
-							"for(let i=0;i<size;i++){",
-							"pm.test(\"IsCityNameIstanbul\", function() {",
+							"",
+							"for(let i=0;i<jsonData.reviewDtos.length;i++){",
+							"pm.test(\"IsCityNameISTANBUL\", function() {",
 							"  pm.expect(jsonData.reviewDtos[i].cityName).to.eql(\"ISTANBUL\");",
-							"})};"
+							"})};",
+							"}",
+							"else if (jsonData.reviewDtos==null){",
+							"",
+							"    pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});",
+							"pm.test(\"message should be 'Not Found'\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"Not Found\");",
+							"",
+							"})} else {",
+							"",
+							"        pm.test(\"Status code is 400\", function () {",
+							"    pm.response.to.have.status(400);",
+							"})",
+							"    pm.test(\"cityName: can not be null\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"'cityName' can not be null.\");",
+							"})",
+							"}",
+							"",
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -108,12 +154,34 @@
 					"listen": "test",
 					"script": {
 						"exec": [
+							" let jsonData = pm.response.json();",
+							"",
+							"",
+							"if(jsonData.reviewDtos && jsonData.reviewDtos!==null){",
+							"",
+							"for(let i=0;i<jsonData.reviewDtos.length;i++){",
+							"pm.test(\"IsCityNameVan\", function() {",
+							"  pm.expect(jsonData.reviewDtos[i].cityName).to.eql(\"VAN\");",
+							"})};",
+							"}",
+							"else if (jsonData.reviewDtos==null){",
+							"",
 							"pm.test(\"Status code is 404\", function () {",
 							"    pm.response.to.have.status(404);",
 							"});",
-							"pm.test(\"message should be 'Not Found'\", function () {",
+							"",
+							"pm.test(\"message: should be 'Not Found'\", function () {",
 							"    pm.expect(pm.response.text()).to.include(\"Not Found\");",
-							"});"
+							"})} ",
+							"",
+							"else {",
+							"    pm.test(\"Status code is 400\", function () {",
+							"    pm.response.to.have.status(400);",
+							"})",
+							"    pm.test(\"cityName: can not be null\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"'cityName' can not be null.\");",
+							"});",
+							"}"
 						],
 						"type": "text/javascript"
 					}
@@ -123,10 +191,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://a7186cd5-de01-4d09-adc9-9cddfb83e72e.mock.pstmn.io?cityName=van",
+					"raw": "https://43a63e71-b824-4c12-b7a9-5f9750a62d21.mock.pstmn.io?cityName=van",
 					"protocol": "https",
 					"host": [
-						"a7186cd5-de01-4d09-adc9-9cddfb83e72e",
+						"43a63e71-b824-4c12-b7a9-5f9750a62d21",
 						"mock",
 						"pstmn",
 						"io"
@@ -149,10 +217,10 @@
 					"script": {
 						"exec": [
 							"",
-							"pm.test(\"Status code is 400\", function () {",
+							"    pm.test(\"Status code is 400\", function () {",
 							"    pm.response.to.have.status(400);",
-							"});",
-							"pm.test(\"cityName can not be null\", function () {",
+							"})",
+							"    pm.test(\"cityName: can not be null\", function () {",
 							"    pm.expect(pm.response.text()).to.include(\"'cityName' can not be null.\");",
 							"});"
 						],
@@ -164,10 +232,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://a7186cd5-de01-4d09-adc9-9cddfb83e72e.mock.pstmn.io?cityName",
+					"raw": "https://43a63e71-b824-4c12-b7a9-5f9750a62d21.mock.pstmn.io?cityName=",
 					"protocol": "https",
 					"host": [
-						"a7186cd5-de01-4d09-adc9-9cddfb83e72e",
+						"43a63e71-b824-4c12-b7a9-5f9750a62d21",
 						"mock",
 						"pstmn",
 						"io"
@@ -175,7 +243,7 @@
 					"query": [
 						{
 							"key": "cityName",
-							"value": null
+							"value": "null"
 						}
 					]
 				}
